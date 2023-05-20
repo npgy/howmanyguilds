@@ -8,7 +8,7 @@ const authBtn = document.querySelector('#auth-btn');
 const logoutBtn = document.querySelector('#logout-btn');
 
 function isAuthed() {
-  return isAuthenticated || localStorage.getItem("isAuthed");
+  return localStorage.getItem("isAuthed");
 }
 
 function clickAuthBtn() {
@@ -31,7 +31,7 @@ function logout() {
   authBtn?.classList.remove("hidden");
   guildsDisplay?.classList.add("hidden");
   logoutBtn?.setAttribute("disabled", "true");
-  localStorage.setItem("isAuthed", "0");
+  localStorage.removeItem("isAuthed");
   console.log("logout");
 }
 
