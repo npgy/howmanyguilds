@@ -1,8 +1,5 @@
 import { Guild } from "./guild";
 
-let isAuthenticated: boolean = false;
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
 const oauthUrl = process.env.OAUTH_URL;
 
 // Page elements
