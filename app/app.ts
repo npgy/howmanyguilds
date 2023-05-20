@@ -1,60 +1,47 @@
 import { Guild } from "./guild";
 
 let isAuthenticated: boolean = false;
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+const oauthUrl = process.env.OAUTH_URL;
 
 // Page elements
 const guildsDisplay = document.querySelector("#guilds-display");
 const authBtn = document.querySelector('#auth-btn');
-const logoutBtn = document.querySelector('#logout-btn');
 
-function isAuthed() {
-  return localStorage.getItem("isAuthed");
+// If true, then enable guilds display and disable auth
+function toggleAuthUI(enable: boolean) {
+  if (enable) {
+    authBtn?.classList.add("hidden");
+    guildsDisplay?.classList.remove("hidden");
+  }
+  else {
+    authBtn?.classList.remove("hidden");
+    guildsDisplay?.classList.add("hidden");
+  }
 }
 
-function clickAuthBtn() {
-  isAuthenticated = true;
-  authenticate();
-}
+window.onload = () => {
 
-function authenticate() {
-  authBtn?.classList.add("hidden");
-  guildsDisplay?.classList.remove("hidden");
-  localStorage.setItem("isAuthed", "1");
-  logoutBtn?.removeAttribute("disabled");
-}
+  authBtn?.setAttribute("href", oauthUrl!);
 
-function clickLogoutBtn() {
-  logout();
-}
+  const fragment = new URLSearchParams(window.location.hash.slice(1));
+  const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
-function logout() {
-  authBtn?.classList.remove("hidden");
-  guildsDisplay?.classList.add("hidden");
-  logoutBtn?.setAttribute("disabled", "true");
-  localStorage.removeItem("isAuthed");
-  console.log("logout");
-}
-
-window.onload = async () => {
-  authBtn?.addEventListener("click", function (evt) {clickAuthBtn()});
-  logoutBtn?.addEventListener("click", function (evt) {clickLogoutBtn()});
-  // const guildsRequest = await fetch("https://discord.com/api/v9/users/@me/guilds", {
-  //   method: "GET",
-  //   headers: {
-  //     "Authorization": ""
-  //   }
-  // }).then(res => {
-  //   res.json().then(json => {
-  //     const guilds: Guild[] = json;
-
-      
-  //   })
-  // });
-
-  if (isAuthed()) {
-    authenticate();
+  if (accessToken) {
+    toggleAuthUI(true);
   }
 
-  if (guildsDisplay) guildsDisplay.innerHTML = `${34}`;
+  fetch("https://discord.com/api/v9/users/@me/guilds", {
+    method: "GET",
+    headers: {
+      "Authorization": `${tokenType} ${accessToken}`
+    }
+  }).then(res => {
+    res.json().then(json => {
+      const guilds: Guild[] = json;
+      if (guildsDisplay) guildsDisplay.innerHTML = `${guilds.length}`;
+    })
+  });
 };
 
