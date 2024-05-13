@@ -1,6 +1,7 @@
 import { Guild } from "./guild";
 
-const oauthUrl = process.env.OAUTH_URL;
+const oauthUrl =
+  "https://discord.com/oauth2/authorize?client_id=1109280997817729085&response_type=token&redirect_uri=https%3A%2F%2Fhowmanyguilds.np.gy%2Fcallback&scope=guilds";
 
 let loggedIn: boolean = false;
 
