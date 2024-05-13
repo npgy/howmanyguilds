@@ -1,40 +1,64 @@
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How Many Guilds?</title>
-    <link href="styles.css" rel="stylesheet">
-</head>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
 
-<body class="dark">
+  <body class="dark">
     <div
-        class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 dark:bg-disdark py-6 py-12">
-        <div
-            class="relative bg-blurple px-6 pt-4 pb-8 drop-shadow-2xl ring-1 ring-gray-900/5 mx-auto max-w-lg rounded-lg px-10 ">
-            <div class="mx-auto max-w-md">
-                <div
-                    class="divide-y divide-gray-300/50 space-y-8 py-8 text-base leading-7 text-white">
-                    <h1 class="text-5xl font-bold">How Many Guilds?</h1>
-                    <div class="relative flex justify-center p-16">
-                        <p id="guilds-display" class="hidden text-9xl text-gray-200 font-bold border-4 border-[#292f7a] rounded-lg p-4 bg-[#3e49bf] align-middle"></p>
-                        <a id="auth-btn" class="bg-[#0d1721] hover:bg-[#0e2339] text-white font-bold py-2 px-4 rounded-lg border-[3px] border-gray-300" href="#">Authenticate</a>
-                    </div>
-                </div>
-                <!-- <div class="relative flex justify-center p-4">
-                    <button id="logout-btn" class="bg-[#3d1721] hover:bg-[#3e2339] text-white font-bold py-2 px-4 rounded-lg border-[3px] border-gray-300">Log Out</button>
-                </div>
-                 -->
+      class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 dark:bg-disdark py-6 py-12"
+    >
+      <div
+        class="relative bg-blurple px-6 pt-4 pb-8 drop-shadow-2xl ring-1 ring-gray-900/5 mx-auto max-w-lg rounded-lg px-10"
+      >
+      <div id="guilds-error" class="hidden relative flex justify-center text-white text-gray-200 font-bold border-4 border-red-200 rounded-lg p-1 bg-red-900 align-middle">
+        <p
+        >Error fetching guilds!</p>
+      </div>
+        <div class="mx-auto max-w-md">
+          <div
+            class="divide-y divide-gray-300/50 space-y-8 py-8 text-base leading-7 text-white"
+          >
+            <h1 class="text-5xl font-bold">How Many Guilds?</h1>
+            <div class="relative flex justify-center p-16">
+              <p
+                id="guilds-display"
+                class="hidden text-9xl text-gray-200 font-bold border-4 border-[#292f7a] rounded-lg p-4 bg-[#3e49bf] align-middle"
+              ></p>
+              <a
+                id="auth-btn"
+                class="bg-[#0d1721] hover:bg-[#0e2339] text-white font-bold py-2 px-4 rounded-lg border-[3px] border-gray-300"
+                href="#"
+                >Authenticate</a
+              >
             </div>
+          </div>
+          
         </div>
-        <footer class="absolute bottom-0 mx-auto inset-x-0 p-4">
-            <div class="text-white flex justify-center relative">
-                <div>Made with ❤️ by <a class="text-yellow-400 hover:text-yellow-500" href="https://npgy.net" target="_blank"> Nick P</a></div>
-            </div>
-        </footer>
+          <div id="logout-btn" class="hidden relative flex justify-center p-4">
+                    <button name="btn" class="bg-[#3d1721] hover:bg-[#3e2339] text-white font-bold py-2 px-4 rounded-lg border-[3px] border-gray-300">Log Out</button>
+                </div>
+                
+        </div>
+      </div>
+      <footer class="absolute bottom-0 mx-auto inset-x-0 p-4">
+        <div class="text-white flex justify-center relative">
+          <div>
+            Made with ❤️ by
+            <a
+              class="text-yellow-400 hover:text-yellow-500"
+              href="https://npgy.net"
+              target="_blank"
+            >
+              Nick P</a
+            >
+          </div>
+        </div>
+      </footer>
     </div>
-    
-    <script type="module" src="app/app.ts"></script>
-</body>
 
+    <script type="module" src="src/main.ts"></script>
+  </body>
 </html>
