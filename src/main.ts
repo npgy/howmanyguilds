@@ -7,7 +7,7 @@ let loggedIn: boolean = false;
 
 // Page elements
 const guildsDisplay = document.querySelector("#guilds-display");
-const guildsError = document.querySelector("#guilds-error");
+// const guildsError = document.querySelector("#guilds-error");
 const authBtn = document.querySelector("#auth-btn");
 const logoutBtn = document.querySelector("#logout-btn");
 logoutBtn?.children.namedItem("btn")?.addEventListener("click", () => logout());
