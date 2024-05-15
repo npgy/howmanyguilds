@@ -30,6 +30,14 @@ export const storeTokens = (tokenType: string, token: string) => {
   localStorage.setItem("token_type", tokenType);
 };
 
+const storeGuildCount = (count: number) => {
+  localStorage.setItem("last_guild_count", String(count));
+};
+
+const getLastGuildCount = (): number => {
+  return Number(localStorage.getItem("last_guild_count"));
+};
+
 const login = () => {
   loggedIn = true;
   updateUI(true);
@@ -48,6 +56,10 @@ function getToken(): string[] {
   ];
 }
 
+function updateGuildDisplay(guildCount: number) {
+  guildsDisplay!.innerHTML = `${guildCount}`;
+}
+
 async function getGuildCount(tokenType: string, accessToken: string) {
   const res = await fetch("https://discord.com/api/v9/users/@me/guilds", {
     method: "GET",
@@ -59,16 +71,25 @@ async function getGuildCount(tokenType: string, accessToken: string) {
   const guilds: Guild[] = await res.json();
 
   if (res.status === 200) {
-    guildsDisplay!.innerHTML = `${guilds.length}`;
-  } else {
-    guildsError?.classList.remove("hidden");
+    const guildCount = guilds.length;
+    updateGuildDisplay(guildCount);
+    storeGuildCount(guildCount);
   }
+  // else {
+  //   guildsError?.classList.remove("hidden");
+  // }
 }
 
 window.onload = async () => {
   authBtn?.setAttribute("href", oauthUrl!);
 
   const [tokenType, accessToken] = getToken();
+
+  const lastGuildCount = getLastGuildCount();
+
+  if (lastGuildCount > 0) {
+    updateGuildDisplay(lastGuildCount);
+  }
 
   if (tokenType !== "" && accessToken !== "") {
     login();
