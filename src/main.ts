@@ -74,10 +74,9 @@ async function getGuildCount(tokenType: string, accessToken: string) {
     const guildCount = guilds.length;
     updateGuildDisplay(guildCount);
     storeGuildCount(guildCount);
+  } else if (res.status == 401) {
+    logout();
   }
-  // else {
-  //   guildsError?.classList.remove("hidden");
-  // }
 }
 
 window.onload = async () => {
